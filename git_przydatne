@@ -1,0 +1,31 @@
+git remote add origin -link
+git init
+git add
+git rm cached
+git commit - zatwierdzenie struktury <- lokalnie
+git commit -m"tresc komunikatu" - wrzucenie komentarza do commitu
+git push origin - do centralnego repo
+git checkout +nazwa pliku - wszelkie zmiany zostaną cofnięte z commitu
+
+# commit - wskaźnik
+# branch - rozgałęzienie
+
+git branch - wyświetla listę branchy
+gir branch +nazwa  - tworzy brancha o nazwie
+git checkout devel - przełącza na brancha (główny "master")
+git push origin +nazwa brancha - wrzuca nam brancha do master
+git pull origin master
+# checkout - poruszanie się po referencjach
+
+
+tag lekki:
+git tag +tag - taguje commit, referencji/brancha w której jesteśmy 
+(po checkoucie)
+git tag -a <nazwa taga> -m "xy" - przechowuje info o dacie, etc
+git tag -s <nazwa taga> -m "xy" - przechowuje info o tym kto zrobił taga
+  
+git stash - zmiana zabierana do koszyczka, opatrzona indeksem
+#można zrobićkilkanaście stashow - ozna odlozyc zmiany na pozniej
+git pop - zmiany ze stasha wracaja do nowej wersji pliku przed pullem
+git apply +indeks - zmiana o danym indeksie naniesiona po pullu
+
