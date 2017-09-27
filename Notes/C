@@ -7,3 +7,214 @@ int main()
 
 2. Compilation model
 
+Compiler produces an object code file for each source file. This object code is in format 
+independent from language. A seperate program called linker takes object files and link them 
+together into exacutable program. It usually performs some extra optimalisation. This is 
+something program can't do taken separate source files.
+
+gcc linking object files:
+gcc -o nazwaouputu file1.o file2.o
+
+gcc to get object files:
+gcc -c file1.c
+
+gcc to link files to executable:
+gcc -o nazwaoutput file1.c file2.c
+
+warnings: dodaj -W
+! in C a global variable is just a declaration unless it is initialized
+ALWAY INITIALISE GLOBAL VARIABLES OR USE STATIC BEFORE INT
+
+Static variable is privately declared and defined for the exclusive use of the functions in 
+the particular source of the file. If I prefex all global variables with static
+they will no longer colide and C compiler will provide distinct storage for each variable.	
+
+Logical operators:
+&& - and
+|| - or - is only considered if left operator is false
+
+Bitwise operators:
+& - bit is 1 if left and right is 1
+| - bit is 1 if either or both are 1
+^ - exclusive or - bit is 1 if either on them is 1 but NO when both are 1
+<< left shift - shifts to the bit position, depending on right
+>> right shift
+They use hexidecimal notation, 
+np. 	   170 -> 1010 1010 - 8 bitów pamieci
+	    90 -> 0101 1010 - 8 bits
+170 & 90 -> 10 -> 0000 1010 - 1 tylko tam gdzie góra i dół daje 1
+170 | 90 ->250 -> 1111 1010
+170 ^ 90 ->240 -> 1111 0000
+170 >> 3 -> 21 -> 0001 0101
+170 << 4 ->160 -> 1010 0000
+
+Unary operators:
+! - logical negation - transfers true into false
+~ - bitwise complement produces set of bits by reversing all of the bits by its upperhand
+++ - increment adds 1
+-- - substracts 1
+prefix return value after it was updated
+postfix return value before it was updated
+- - undary negation, refers to negative
+
+Assignement Operators:
+
+= - simple assignement
++= add (np. apples = apples +4 albo apples += 4)
+
+Precedence of Operators
+lvalue - object the variable name refers to
+rvalue - value of data placed in variable
+ 
+c*9 / 5+32 - expression
+f = c * 9 / 5 + 32; - statement
+int apples; - declaration
+; - empty statement
+{ s1; s2; s3; } - compound statement
+
+STATEMENTS
+
+if (expression) statement else statement
+if (expression) statement else if statement
+if (expression) statement 
+
+ITERATION STATEMENTS
+
+while (expression)
+{
+statement
+}  	// will evaluate the expression and repeat if needed
+
+do 
+{
+statement 
+}
+while (expression); // always execute the statement, repeat if needed until expresion is false
+
+for (first-sxpression; conditional-expression; loop-expression)
+{
+statement
+} 
+
+LOOP JUMPING
+
+continue; - stop but allows other to be executed
+break; - stop iterration - no futher iterrations
+
+SWITCH STATEMENTS
+
+jak musisz porównać variable to many other variables
+
+switch (expression)
+{
+	case constant-expression: statement break;
+	default: statement
+}
+%d - place holder for integers
+%f - place holder for doubles
+
+
+POINTER - variable that stores the address of some other variable
+
+Computer memory typically consist of 8 bit bytes in one continues sequence.
+Portions of this memory are reserved when the program starts to store
+the program code, static or external variables as well as contain a 
+stack of function calls, their arguments, local variables and so on.
+
+The storage for each variable must reside in the memory, and its reside is define 
+as an adress
+
+EVERY VARIABLE HAS AN ADDRESS.   
+char * ptr_to_char;
+void * ptr_to_unknown - void as some variable which type is not known to the compiler
+int * ptr_to_nothing = 0; - pointer which is currently not pointing to anything
+
+Przykład:
+
+int apples = 5; - deklarujemy zmienną, nie znamy jej adresu
+int * p = &apples; - wskazujemy na adres zmiennej (& returns address of an object)
+* - tells us that this variable is pointer to int and is initialised by the address of variable of apple
+
+int oranges = *p + 6; - dereference operator, the pointer of p plus 6 - the result of 
+the operation is used to initialise cariable oranges
+
+int * p; - not initialized so when we do int oranges = *p + 6; - nobody nows what happens
+
+int * p = 0; - variable is initialized to 0 so int oranges = *p + 6;  but zero is treated as false in c
+
+najlepiej: if (p) { int oranges = *p + 6; } - we check if p is pointed to anything
+
+ARRAYS - 
+
+struktura:
+
+int values[5]; -> {?, ?, ?, ?, ? }; - enough storage is provided by the stack to store 5 continues integers.
+int values[] = { 1, 2, 3, 4, 5 };
+int values[5] = {1, 2, 3 } - > { 1, 2, 3, 0, 0 }
+char buffer[1024] = {0} - > {0, 0 , 0, .... 0} 
+values[0] = 1; - > {1, ?, ?, ?} - wiemy, że pierwsza wartość (zerowa) wynosi 1
+values[4] = values[0] -> {1, ?, ?, ?, 1}
+
+Teraz to samop z pointerami:
+
+int * ptr = values; - pointing to first element
+int * last = &values[4]; - pointing to the last, mówi nam, że 1. i ostatni są te same
+++ptr - pointing to trhe next
+ptr += 3 - pointer is pointing 3 elements ahead
+
+Function declarations - in header files, is exactly the same as definition - except that function body
+is replaced by semi column:
+
+int c_t_f(int c)
+{
+	return c * 9/5 + 32;
+} //definicja can be included in seperated source file and compiled seperately
+
+int c_t_f (int c); //deklaracja
+
+If you have a local variable and then call a function passing it as parameter, calling of
+that function makes a copy of that variable for the function. The function sees the copy
+rather than original local variable. In effect the function has its own copy which is a local
+variable to that function. This is even a case for pointers. In that case the functions gets 
+the copy of a pointer, but obviously not a copy of an object being copied to.
+
+Creating pointers to functions:
+
+int (* convert)(int from) = c_t_f; // it reduces dependencies on different parts of the program;
+
+To define pointer types for pointer functions signatures we use typedef:
+
+typedef int (* converter)(int from);
+converter convert = c_t_f;
+printf(" %d\n", convert(34));
+
+
+STRUCTURES
+structure (record) declaration:
+
+struct color
+{ 
+	float red;
+	float green;
+	float blue;
+	float alpha;
+};
+
+typedef struct 
+{
+	float red;
+	float green;
+	float blue;
+	float alpha;
+} color;
+
+c.green = c.red - object memory selection operator - c is now yellow
+color colors[5]; - array of five colors
+color * first = colors; - pointer points to first color in the array
+color * next = first + 1 - 16 bites ahead from the first pointer
+next->alpha = 0.5;
+
+
+
+
+

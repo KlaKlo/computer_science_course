@@ -1,26 +1,28 @@
 /*
  * =====================================================================================
  *
- *       Filename:  2.c
+ *       Filename:  1.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  26.09.2017 16:42:36
+ *        Created:  27.09.2017 16:57:04
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (claraloft), 
+ *         Author:  YOUR NAME (), 
  *   Organization:  
  *
  * =====================================================================================
  */
 #include <stdio.h>
-
-void hello();
 int main()
 {
-    hello();
+    int apples = 5;
+    int oranges = apples;
+    apples = 4;
+
+    printf("apples=%d oranges=%d\n", apples, oranges);
+
     return 0;
 }
-
