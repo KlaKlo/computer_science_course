@@ -1,0 +1,8 @@
+Implemetacja queue w C
+
+1. Enqueue (Key) - dodanie klucza do kolejki
+
+	fifo - first in first out
+Implementacja - np. w serwerach gdzie są requesty, ktory trzeba w kolejnosci
+dodawać
+
