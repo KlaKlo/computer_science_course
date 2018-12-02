@@ -1,0 +1,23 @@
+SSH - port 22
+systemctl start shh 
+netstat -antp|grep sshd
+systemctl - command to enable or disable sta start most services, np. enable ssh
+
+HTTP - port 80
+systemctl start apache2
+rcconf/sysvrc-conf
+
+wget - getting index page for example
+grep "href=" index,html - searching for href = in index.html file
+grep "href=" index.html | cut -d "/" -f 3 - cutting the search with delimeter/
+at the third field  
+grep "\." - filtering period
+sort -u - sorting unique entries
+cat index.html | grep -o 'http://[^"]*' | cut -d "/" -f 3 | sort -u >
+list.txt - saving entries in a file lists.txt
+
+for url in $(cat list.txt); do host $url; done - dla kazdego url w  list.txt
+do host command (find corresponding IP addreses)
+
+head  [filename] - shows first 10 lines of file
+wc -l [filename] - shows how many lines the file has  
